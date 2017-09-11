@@ -19,7 +19,6 @@ export const usersRoutes: Routes = [
         ]},
         {path: '**', redirectTo: '/list'},
     ]}
-
 ];
 
 @NgModule({
