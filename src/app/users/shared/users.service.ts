@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot, Resolve } from "@angular/router";
+import { ActivatedRouteSnapshot, Resolve, Router } from "@angular/router";
 import { Injectable } from '@angular/core';
 import { Http } from "@angular/http";
 import { FormGroup } from "@angular/forms";
@@ -7,6 +7,8 @@ import { Observable } from "rxjs/Observable";
 import { User } from "./user.model";
 import { Subject } from "rxjs/Subject";
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class UsersService {
@@ -26,13 +28,13 @@ export class UsersService {
             .map(response =>  response.json());
     }
 
-    getUserById(id: number): Observable<User> {
-        return this.http.get('/users/' + id)
+    getUserById(id: number): Observable<any> | any {
+        return this.http.get(`/users/${id}`)
             .map(response =>  new User(response.json()));
     }
 
     changeUserInfo(id: number, form: FormGroup): Observable<User> {
-        return this.http.put('/users/' + id, form.value)
+        return this.http.put(`/users/${id}`, form.value)
             .map(response =>  new User(response.json()));
     }
 }
@@ -50,10 +52,15 @@ export class UserListResolver implements Resolve<User[]> {
 @Injectable()
 export class UserByIdResolver implements Resolve<User> {
 
-    constructor(private usersService: UsersService) {}
+    constructor(private usersService: UsersService,
+                private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot): Observable<User> {
-        return this.usersService.getUserById(route.params['id']);
+    resolve(route: ActivatedRouteSnapshot): Observable<User> | any {
+        return this.usersService.getUserById(route.params['id'])
+            .catch(error => {
+                this.router.navigate(['/list']);
+                return Observable.of(null);
+            });
     }
 }
 

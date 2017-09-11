@@ -38,7 +38,7 @@ export class Address {
     }
 
     getFullAddress() {
-        return this.zipcode + ' ' + this.city + ' ' + this.street + ' ' + this.suite;
+        return `${this.zipcode} ${this.city} ${this.street} ${this.suite}`;
     }
 }
 
@@ -53,7 +53,7 @@ export class GeoPosition {
     }
 
     getMapLink() {
-        return 'https://www.google.com/maps/preview/@' + this.lat + ',' + this.lng + ',19z'
+        return `https://www.google.com/maps/preview/@${this.lat},${this.lng},19z`;
     }
 }
 
@@ -70,6 +70,6 @@ export class Company {
     }
 
     getCompanyInfo() {
-        return this.name + ', ' +  this.catchPhrase + ', ' + this.bs;
+        return `${this.name}, ${this.catchPhrase}, ${this.bs}`;
     }
 }

@@ -7,6 +7,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditForm } from "./shared/user-edit.form";
+import { UsersComponent } from "./users.component";
 
 
 @NgModule({
@@ -18,12 +19,14 @@ import { UserEditForm } from "./shared/user-edit.form";
     exports: [
         UserEditComponent,
         UserListComponent,
-        UserViewComponent
+        UserViewComponent,
+        UsersComponent
     ],
     declarations: [
         UserEditComponent,
         UserListComponent,
-        UserViewComponent
+        UserViewComponent,
+        UsersComponent
     ],
     providers: [
         UserEditForm

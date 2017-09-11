@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { User } from "../shared/user.model";
 import { UsersService } from "../shared/users.service";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
     selector: 'app-user-view',
     templateUrl: './user-view.component.html',
     styleUrls: ['./user-view.component.css']
 })
-export class UserViewComponent implements OnInit {
+export class UserViewComponent implements OnInit, OnDestroy {
 
     user: User;
+    userSubscription = new Subscription();
 
     constructor(private route: ActivatedRoute, private usersService: UsersService) {
         this.usersService.selectedUser = this.route.snapshot.data['user'];
@@ -19,10 +21,14 @@ export class UserViewComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.route.snapshot.data['user'];
-        this.usersService.user$.subscribe((user: User) => {
+        this.userSubscription = this.usersService.user$.subscribe((user: User) => {
             this.user = user;
             this.usersService.selectedUser = this.user;
         });
+    }
+
+    ngOnDestroy() {
+        this.userSubscription.unsubscribe();
     }
 
 }

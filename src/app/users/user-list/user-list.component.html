@@ -22,7 +22,7 @@
             <tbody>
                 <tr *ngFor="let user of users">
                     <td>
-                        <span>{{user.name}}</span>
+                        <span class="username">{{user.name}}</span>
                     </td>
                     <td>
                         <span>{{user.email}}</span>
@@ -38,7 +38,7 @@
                             <!--<span class="glyphicon glyphicon-pencil"></span>-->
                             <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
                         <!--</div>-->
-                        <a [routerLink]="['/view', user.id]">Details</a>
+                        <a [routerLink]="['/view', user.id]" class="details">Details</a>
                     </td>
                 </tr>
             </tbody>
