@@ -15,6 +15,8 @@ export class UserListComponent implements OnInit {
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
+
+        // get list of users from resolver
         this.users = this.route.snapshot.data['users'];
     }
 

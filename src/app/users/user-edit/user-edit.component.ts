@@ -25,8 +25,13 @@ export class UserEditComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
+        // send new information to endpoint
         this.changeInfo = this.usersService.changeUserInfo(this.user.id, this.form).subscribe(response => {
+
+            // trigger user subject for user-view component
             this.usersService.userChanged(response);
+
+            // navigate back to /view/:id
             this.router.navigate(['../'], {relativeTo: this.route});
         }, function(error) {
             console.log(error);
@@ -34,7 +39,10 @@ export class UserEditComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        // get user from service (stored by user-view)
         this.user = this.usersService.selectedUser;
+
+        // get ReactiveForm for editing user
         this.form = this.editForm.getUserEditForm(this.user);
     }
 
