@@ -6,9 +6,9 @@ describe('users-cloud App', () => {
   beforeEach(() => {
     page = new UsersCloudPage();
   });
-
-  it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
+  //
+  // it('should display message saying app works', () => {
+  //   page.navigateTo();
+  //   expect(page.getParagraphText()).toEqual('app works!');
+  // });
 });
