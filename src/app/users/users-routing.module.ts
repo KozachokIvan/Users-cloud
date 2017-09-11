@@ -17,7 +17,7 @@ export const usersRoutes: Routes = [
             ]},
             {path: '', redirectTo: '/list', pathMatch: 'full'}
         ]},
-        {path: '**', redirectTo: 'list'},
+        {path: '**', redirectTo: '/list'},
     ]}
 
 ];

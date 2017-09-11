@@ -57,7 +57,7 @@ export class UserByIdResolver implements Resolve<User> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<User> | any {
         return this.usersService.getUserById(route.params['id'])
-            .catch(error => {
+            .catch(() => {
                 this.router.navigate(['/list']);
                 return Observable.of(null);
             });
