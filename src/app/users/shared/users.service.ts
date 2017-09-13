@@ -28,7 +28,7 @@ export class UsersService {
             .map(response =>  response.json());
     }
 
-    getUserById(id: number): Observable<any> | any {
+    getUserById(id: number): Observable<User> | any {
         return this.http.get(`/users/${id}`)
             .map(response =>  new User(response.json()));
     }
